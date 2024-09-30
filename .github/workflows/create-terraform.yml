@@ -41,16 +41,10 @@ jobs:
           terraform init
 
       - name: Terraform plan
-        env:
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          terraform plan -var "db_username=${{ secrets.DB_USER }}" -var "db_password=${{ secrets.DB_PASSWORD }}"
+          terraform plan
 
       - name: Terraform apply
         if: github.ref == 'refs/heads/main'
-        env:
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          terraform apply -auto-approve -var "db_username=${{ secrets.DB_USER }}" -var "db_password=${{ secrets.DB_PASSWORD }}"
+          terraform apply
